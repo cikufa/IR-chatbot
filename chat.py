@@ -11,13 +11,13 @@ class ChitChatAPI:
         response = self.tokenizer.decode(reply_ids[0], skip_special_tokens=True)
         return response
 
-# if __name__ == "__main__":
-#     chatter = ChitChatAPI()
-#     print("Hey Welcome to BlenderBot! Type 'exit' to quit.")
-#     while True:
-#         user_input = input("You: ")
-#         if user_input.lower() == "exit":
-#             print("Goodbye!")
-#             break
-#         response = chatter.get_response(user_input)
-#         print(f"Bot: {response}")
+if __name__ == "__main__":
+    chatter = ChitChatAPI()
+    print("Hey Welcome to BlenderBot! Type 'exit' to quit.")
+    while True:
+        user_input = input("You: ")
+        if user_input.lower() == "exit":
+            print("Goodbye!")
+            break
+        response = chatter.get_response(user_input)
+        print(f"Bot: {response}")
