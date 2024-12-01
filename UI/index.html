@@ -9,7 +9,7 @@
 <body>
     <div class="chatbot-container">
         <div class="header">
-            <h2>RAN Bot</h2>
+            <h2>Chatbot</h2>
         </div>
         <div class="chat-window">
             <div class="messages" id="chat-messages">
@@ -17,10 +17,24 @@
             </div>
             <div class="user-input">
                 <input type="text" id="user-input" placeholder="Type a message..." />
-                <button onclick="sendMessage()">Send</button>
+                <button id="send-button" onclick="sendMessage()">Send</button>
             </div>
         </div>
         <div class="topics">
+            <h3>Topics</h3>
+            <ul>
+                <li class="topic-item" onclick="selectTopic(this)">Health</li>
+                <li class="topic-item" onclick="selectTopic(this)">Environment</li>
+                <li class="topic-item" onclick="selectTopic(this)">Technology</li>
+                <li class="topic-item" onclick="selectTopic(this)">Economy</li>
+                <li class="topic-item" onclick="selectTopic(this)">Entertainment</li>
+                <li class="topic-item" onclick="selectTopic(this)">Sports</li>
+                <li class="topic-item" onclick="selectTopic(this)">Politics</li>
+                <li class="topic-item" onclick="selectTopic(this)">Education</li>
+                <li class="topic-item" onclick="selectTopic(this)">Food</li>
+            </ul>
+        </div>        
+        <!-- <div class="topics">
             <h3>Topics</h3>
             <ul id="topics-list">
                 <li onclick="selectTopic(this)">Health</li>
@@ -33,7 +47,7 @@
                 <li onclick="selectTopic(this)">Education</li>
                 <li onclick="selectTopic(this)">Food</li>
             </ul>
-        </div>
+        </div> -->
     </div>
     <script src="script.js"></script>
 </body>

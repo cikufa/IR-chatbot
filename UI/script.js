@@ -1,16 +1,21 @@
-let selectedTopic = null;  // Variable to store the selected topic
+// script.js
+
+let selectedTopics = [];
 
 function selectTopic(element) {
-    // Remove 'selected' class from all topics
-    const topics = document.querySelectorAll('#topics-list li');
-    topics.forEach(topic => topic.classList.remove('selected'));
+    const topic = element.textContent.trim();
 
-    // Add 'selected' class to the clicked topic
-    element.classList.add('selected');
+    if (selectedTopics.includes(topic)) {
+        // Deselect the topic
+        selectedTopics = selectedTopics.filter(t => t !== topic);
+        element.classList.remove('selected');
+    } else {
+        // Select the topic
+        selectedTopics.push(topic);
+        element.classList.add('selected');
+    }
 
-    // Store the selected topic
-    selectedTopic = element.textContent.trim();
-    console.log('Selected topic:', selectedTopic);
+    console.log('Selected topics:', selectedTopics);
 }
 
 function sendMessage() {
@@ -18,13 +23,9 @@ function sendMessage() {
     const message = input.value.trim();
 
     if (message) {
-        if (!selectedTopic) {
-            alert('Please select a topic before sending your message.');
-            return;
-        }
+        const chatMessages = document.getElementById('chat-messages');
 
         // Display user's message
-        const chatMessages = document.getElementById('chat-messages');
         const userMessage = `<div class="user-message">${message}</div>`;
         chatMessages.innerHTML += userMessage;
 
@@ -34,25 +35,18 @@ function sendMessage() {
         // Clear input field
         input.value = '';
 
-        // Send message and selected topic to the bot
-        getBotResponse(message, selectedTopic);
+        // Send message and selected topics to the server
+        getBotResponse(message, selectedTopics);
     }
 }
-
-async function getBotResponse(message, topic) {
-    const dataToSend = { message };
-    if (topic) {
-        dataToSend.topic = topic;
-    }
-
+async function getBotResponse(message, topics) {
     const response = await fetch('http://127.0.0.1:5000/chat', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify(dataToSend),
+        body: JSON.stringify({ message, topics }), // Send the user's message and selected topics as JSON
     });
-
     const data = await response.json();
 
     const chatMessages = document.getElementById('chat-messages');

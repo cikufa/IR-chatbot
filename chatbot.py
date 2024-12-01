@@ -14,14 +14,14 @@ class Chatbot:
 
         self.type_cnt = [0,0] #visualization 1. ratio of query to chitchat
 
-    def process_input(self, user_input, topic):
+    def process_input(self, user_input, topics):
         input_type= self.classifier.predict([user_input])[0] # Assuming 0 = "query", 1 = "chit-chat"
         self.type_cnt[input_type] += 1
         print("input type: ", input_type)
         if input_type == 1:  # Chit-chat
             return self.chit_chat_api.get_response(user_input)
         else:  # Query
-            return self.wikipedia_retriever.get_data(user_input, topic)
+            return self.wikipedia_retriever.get_data(user_input, topics)
         
 class WikipediaRetriever:
     def get_data(self, query, topic):
@@ -34,12 +34,11 @@ chat_system = Chatbot()
 @app.route('/chat', methods=['POST'])  # This explicitly allows POST requests
 def chat():
     data = request.json
-    topic = data.get('topic')
+    topics = data.get('topics', [])     
     user_input= data.get('message', '') 
     if user_input.lower() == "exit":
         return jsonify({'response':"Goodbye!"})
-    bot_response = chat_system.process_input(user_input, topic)
-    print("41 happening ")
+    bot_response = chat_system.process_input(user_input, topics)
     return jsonify({'response': bot_response})
 
 if __name__ == '__main__':

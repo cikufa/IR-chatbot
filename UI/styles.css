@@ -41,8 +41,9 @@ body {
     height: 500px;
     background-color: #121212; /* Match the body background */
     border-bottom: 1px solid #333;
+    display: flex;
+    flex-direction: column;
 }
-
 .messages .user-message {
     margin: 10px 0;
     padding: 10px;
@@ -52,6 +53,7 @@ body {
     align-self: flex-end;
     max-width: 70%;
     word-wrap: break-word;
+    text-align: right; /* Align text to the right */
 }
 
 .messages .bot-message {
@@ -63,6 +65,7 @@ body {
     align-self: flex-start;
     max-width: 70%;
     word-wrap: break-word;
+    text-align: left; /* Align text to the left */
 }
 
 .user-input {
@@ -139,3 +142,20 @@ body {
     transform: translateY(2px); /* Button press effect */
     background-color: #9a63d4;
 }
+
+.topic-item.active {
+    background-color: #72b2d0; /* Light purple background */
+    color: #121212; /* Dark text */
+    font-weight: bold;
+    border: 1px solid #bb86fc;
+    transform: translateY(-5px); /* Lift effect */
+}
+
+.topics li.selected {
+    background-color: #bb86fc; /* Light purple background */
+    color: #121212; /* Dark text */
+    font-weight: bold;
+    border: 1px solid #bb86fc;
+    transform: translateY(-5px); /* Lift effect */
+}
+
