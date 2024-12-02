@@ -72,14 +72,17 @@ class Indexer:
 
         print(requests.post(self.solr_url + self.core_name + "/schema", json=data).json())
     
-    def query_solr(self, query: str, topic:str, k:int = 10) -> pysolr.Results:
+    def query_solr(self, query: str, topics:list, k:int = 10) -> pysolr.Results:
+
+
+        topic_filter = " OR ".join([f"topic:\"{topic}\"" for topic in topics])
         
         params = {
             'fl': ','.join(self.query_fields + ['score']),
             'rows': k,
             'defType': 'edismax', 
             'qf': ' '.join([f"{field}^{weight}" for field, weight in (self.weights).items()]),
-            'fq': f"topic:\"{topic}\""
+            'fq': topic_filter
         }
         results = self.connection.search(query, **params)
     
@@ -107,8 +110,8 @@ if __name__ == "__main__":
 
     # Test query
     query = "What is a transformer in machine learning"
-    topic = "Technology"
-    results = i.query_solr(query, topic)
+    topics = ["Technology"]
+    results = i.query_solr(query, topics)
     for result in results:
         title = result.get("title", "[No Title]")
         summary = result.get("summary", "[No Summary]")
