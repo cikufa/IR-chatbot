@@ -74,7 +74,6 @@ class Indexer:
     
     def query_solr(self, query: str, topics:list, k:int = 10) -> pysolr.Results:
 
-
         topic_filter = " OR ".join([f"topic:\"{topic}\"" for topic in topics])
         
         params = {
