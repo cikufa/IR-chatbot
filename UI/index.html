@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chatbot</title>
     <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> <!-- Include Chart.js -->
+    
 </head>
 <body>
     <div class="chatbot-container">
@@ -34,21 +36,27 @@
                 <li class="topic-item" onclick="selectTopic(this)">Food</li>
             </ul>
         </div>        
-        <!-- <div class="topics">
-            <h3>Topics</h3>
-            <ul id="topics-list">
-                <li onclick="selectTopic(this)">Health</li>
-                <li onclick="selectTopic(this)">Environment</li>
-                <li onclick="selectTopic(this)">Technology</li>
-                <li onclick="selectTopic(this)">Economy</li>
-                <li onclick="selectTopic(this)">Entertainment</li>
-                <li onclick="selectTopic(this)">Sports</li>
-                <li onclick="selectTopic(this)">Politics</li>
-                <li onclick="selectTopic(this)">Education</li>
-                <li onclick="selectTopic(this)">Food</li>
-            </ul>
-        </div> -->
     </div>
-    <script src="script.js"></script>
+
+    <!-- Dashboard section -->
+    <div id="dashboard-container" style="display: none;">
+        <h3>Dashboard</h3>
+        
+        <!-- Existing charts for number of queries and response time -->
+        <canvas id="queriesChart"></canvas>  <!-- For queries by topic -->
+        <canvas id="responseTimeChart"></canvas> <!-- For response times by topic -->
+        
+        <!-- New chart for topic timeline -->
+        <canvas id="topicTimelineChart"></canvas> <!-- Timeline of topics -->
+        
+        <p>Total Queries: <span id="total-queries">0</span></p>
+        <p>Chit-Chat Count: <span id="chitchat-count">0</span></p>
+        <p>Most Popular Topic: <span id="most-popular-topic">None</span></p>
+        <p>Minimum Response Time: <span id="min-response-time">0.00s</span></p>
+        <p>Maximum Response Time: <span id="max-response-time">0.00s</span></p>
+    </div>
+    <button onclick="toggleView()">Toggle Chatbot/Dashboard</button>
+
+    <script src="script.js"></script> <!-- Link to the updated JavaScript -->
 </body>
 </html>

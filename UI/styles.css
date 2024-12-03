@@ -159,3 +159,32 @@ body {
     transform: translateY(-5px); /* Lift effect */
 }
 
+#dashboard-container {
+    display: none;
+    background-color: #121212; /* Dark background */
+    color: #e0e0e0;
+    padding: 20px;
+    border-radius: 10px;
+    margin-top: 20px;
+}
+
+canvas {
+    margin-top: 20px;
+    max-width: 100%;
+    max-height: 400px;
+}
+
+button {
+    padding: 10px;
+    font-size: 1.2em;
+    background-color: #bb86fc;
+    color: #121212;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background 0.3s ease;
+}
+
+button:hover {
+    background-color: #9a63d4;
+}
